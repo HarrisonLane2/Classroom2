@@ -1,0 +1,71 @@
+﻿@page "/chat"
+
+@using System.Collections.Generic
+@using Models
+@code {
+
+    string newMessage;
+    List<Message> Messages = new List<Message>()
+     {
+
+
+         new Message {Body = "Praesent bibendum, lectus eu scelerisque iaculis, elit mi varius risus, ac rutrum neque est non tortor." },
+         new Message {Body = "Sed nec purus orci. Phasellus bibendum condimentum tortor at dictum. Etiam ut purus eros." },
+         new Message {Body = "Integer eget aliquet odio, sed maximus augue. Nunc varius varius purus, a vestibulum ligula accumsan vitae."},
+         new Message {Body = "Nulla vestibulum iaculis dolor, et bibendum erat semper at. Orci varius natoque penatibus et magnis"},
+         new Message {Body = "Mauris viverra velit quis risus consectetur, non ultrices felis rutrum. Quisque ut iaculis libero."},
+
+     };
+
+    private void addMessage(string message)
+    {
+        Messages.Add(new Message { Body = message });
+    }
+}
+
+
+<h3>Chat</h3>
+
+<div class="container border border-4 border-dark">
+    <div class="row rounded-top bg-dark">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2 p-2">
+                    <div class="text-center">
+                        <img src="https://www.placecage.com/75/75" class="rounded-circle border border-4  border-light" alt="profile" />
+                    </div>
+                </div>
+                <div class="col p-4">
+                    <span class="text text-light">Harrison lane</span> <br />
+                    <span class="small text-light mt-3">19 New messages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col ">
+            <dic class="container-fluid">
+                @foreach (Message message in Messages)
+                {
+                    <div class="row">
+                        <div class="col m-4 p-4 bg-info rounded-pill">
+                            <span class="text-light">@message.Body</span>
+                        </div>
+                    </div>
+                }
+            </dic>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter Text Here" @bind="@newMessage" aria-label="Text Box" aria-describedby="basic-addon2">
+                <button type="button" class="btn btn-outline-secondary " @onclick="() => addMessage(newMessage)">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
